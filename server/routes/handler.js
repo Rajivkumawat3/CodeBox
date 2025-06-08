@@ -2,6 +2,9 @@
 const express = require('express')
 const fs = require('fs')
 const bodyParser = require('body-parser')
+const pythonHandler = require('../languages/python')
+const cppHandler = require('../languages/cpp')
+const jsHandler = require('../languages/javascript')
 const crypto = require('crypto')
 
 const path = require('path')
@@ -66,7 +69,64 @@ router.post('/code', (req, res) => {
       }
 
       // switching logic to call language specific handler
+      switch (language) {
+        // python
+        case 'py': {
+          console.log('handler.js py language switch')
+          pythonHandler(key, USERSTORAGEPATH)
+            .then((result) => {
+              console.log('responding to client with result')
+              console.log(result)
+              const { stdout, stderr, code, signal } = result
+              const err_send = stderr || signal || code
+              if (err_send) {
+                res.send(err_send)
+              }
+              res.send(stdout)
+            }) // callback responds result of successful execution
+            .catch((err) => res.send(err)) // callback responds result of failed execution
+          break
+        }
 
+        // c++
+        case 'cpp': {
+          console.log('handler.js cpp language switch')
+          cppHandler(key, USERSTORAGEPATH)
+            .then((result) => {
+              console.log('responding to client with result')
+              console.log(result)
+              const { stdout, stderr, code, signal } = result
+              const err_send = stderr || signal || code
+              if (err_send) {
+                res.send(err_send)
+              }
+              res.send(stdout)
+            }) // callback responds result of successful execution
+            .catch((err) => {
+              console.log('responding to client with err')
+              console.log(err)
+              res.send(err)
+            }) // callback responds result of failed execution
+          break
+        }
+
+        // node.js
+        case 'js': {
+          jsHandler(key, USERSTORAGEPATH)
+            .then((result) => {
+              const { stdout, stderr, code, signal } = result
+              const err_send = stderr || signal || code
+              if (err_send) {
+                res.send(err_send)
+              }
+              res.send(stdout)
+            }) // callback responds result of successful execution
+            .catch((err) => res.send(err)) // callback responds result of failed execution
+          // break
+        }
+
+
+      }
     })
   })
 })
