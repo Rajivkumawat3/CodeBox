@@ -1,6 +1,6 @@
 # *codeBox* - A Remote Code Executer
 
-<!-- ![Client App Demo Gif](./docs/rce-demo.gif) -->
+![Client App Demo Gif](./docs/rce-demo.gif)
 
 ***
 
@@ -21,7 +21,7 @@ The client application, linked above, is available to access the API. It enables
 
 ## Set Up
 
-if you wish to set the project up yourself, documentation has been provided in the `docs` folder. Check out [DOCS.md](https://github.com/rajivkumawat3/codebox/blob/main/docs/DOCS.md) for a detailed reference. It describes local machine setup and service functioning. Read [SERVER.md](https://github.com/rajivkumawat3/codebox/blob/main/docs/SERVER.md) for documentation on deployment.
+if you wish to set the project up yourself, documentation has been provided in the `docs` folder. Check out [DOCS.md](https://github.com/rajivkumawat3/codebox/blob/main/docs/DOCS.md) for a detailed reference. It describes local machine setup and service functioning.
 
 ## Tech Stack
 
